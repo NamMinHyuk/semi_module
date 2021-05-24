@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<!-- xml은 이렇게 수정된다. -->
+<configuration>
+
+	<!-- properties의 경로를 설정해준다. -->
+	<properties resource="com/page/db/db.properties"></properties>
+	
+	<typeAliases>
+		<typeAlias type="com.page.dto.pageDto" alias="pageDto"/>
+	</typeAliases>
+
+	
+	<!-- db 연결 정보를 설정, default는 아래와 같다 -->
+	<environments default="development">
+		<environment id="development">
+		<!-- transaction 관리는 jdbc를 쓰겠다 -->
+		<transactionManager type="JDBC" />
+		<!-- DB 커넥션 풀 -->
+		<dataSource type="POOLED">
+			<property name="driver" value="${driver}"/>
+			<property name="url" value="${url}"/>
+			<property name="username" value="${username}"/>
+			<property name="password" value="${password}"/>
+		</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- sql을 보관할 xml 파일 경로 설정 -->
+	<mappers>
+		<mapper resource="com/page/db/page.xml"/>
+	</mappers>
+
+</configuration>

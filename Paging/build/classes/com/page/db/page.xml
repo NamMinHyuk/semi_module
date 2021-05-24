@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="page.mapper">
+
+	<select id="AllCount" resultType="int">
+		SELECT COUNT(*) AS cnt FROM PAGEMODULE
+	</select>
+
+	<select id="selectList" resultType="pageDto" parameterType="pageDto">
+		SELECT X.TITLE
+		FROM (
+			SELECT ROWNUM AS rnum, A.TITLE
+			FROM (
+				SELECT TITLE FROM PAGEMODULE
+			) A
+			WHERE ROWNUM <![CDATA[ <= ]]> #{pageEnd}	
+		) X
+		WHERE X.rnum <![CDATA[ >= ]]> #{pageBegin}
+	</select>
+
+</mapper>
